@@ -12,7 +12,7 @@ const favoritesSlice = createSlice({
     reducers: {
         SET_NEW_FAVORITE: (state, { payload }) => {
             const newFavorite = payload
-            if(state.favorites.length <= 12){
+            if(state.favorites.length < 12){
                 const newArray = [...state.favorites, newFavorite]
                 localStorage.setItem("favorites", JSON.stringify({ array: newArray }))
                 return {

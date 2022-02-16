@@ -38,14 +38,14 @@ const PokemonData = ({ data, color }) => {
     const { darkMode } = useSelector(({ theme }) => theme)
 
     const isFavorite = () => {
-        return favorites.includes(data?.id)
+        return favorites.includes(data?.name)
     }
 
     const toggleFavorite = () => {
         if(isFavorite()){
-            dispatch(REMOVE_FAVORITE(data.id))
+            dispatch(REMOVE_FAVORITE(data.name))
         } else{
-            dispatch(SET_NEW_FAVORITE(data.id))
+            dispatch(SET_NEW_FAVORITE(data.name))
         }
     }
 
@@ -78,7 +78,7 @@ const PokemonData = ({ data, color }) => {
             <BasicPokemonData data={data} dataType={"abilities"}></BasicPokemonData>
         </div>
         <div className="bio">
-            {pokemonBio}
+            {pokemonBio?.replace("\f", " ")} 
         </div>
         <h3 className="colorful">
             Base Stats

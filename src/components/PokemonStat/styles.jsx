@@ -12,7 +12,9 @@ const Stat = styled.div`
       dark ? theme.colors.greyscale.white : "initial"};
 
     font-size: 12px;
-    margin: 0 10px;
+    display: flex;
+    justify-content: center;
+    width: 50px;
   }
   .stat-bar {
     height: 6px;

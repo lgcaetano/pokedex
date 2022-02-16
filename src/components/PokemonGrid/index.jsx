@@ -24,6 +24,8 @@ const PokemonGrid = (props) => {
 
     const { pokemonList, isLoading } = useSelector(({ pokemons }) => pokemons)
 
+    console.log(pokemonList)
+
     addInfiniteScrollListener(() => {
         if(!isLoading)
             dispatch(GET_MORE_POKEMONS())
@@ -34,7 +36,7 @@ const PokemonGrid = (props) => {
     }, [dispatch])
 
     const generateCards = () => {
-        return pokemonList?.filter(e => e.name.includes(props.filter)).map(element => { 
+        return pokemonList?.filter(props.filterFunction).map(element => { 
             return (
                 <PokemonCard name={element.name} url={element.url} key={element.name}/>
             )

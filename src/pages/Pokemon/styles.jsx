@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 const Pokemon = styled.div`
     width: 100%;
+    padding-right: 30px;
     flex-grow: 1;
     display: flex;
     .left-panel{
@@ -19,25 +20,10 @@ const Pokemon = styled.div`
         }
         .pokemon-photo{
             position: absolute;
-            height: 340px;
-            max-width: 340px;
-            left: 170px;
+            width: 340px;
+            max-height: 340px;
+            right: -100px;
             top: 66px;
-        }
-        .arrow{
-            position: relative;
-            top: 4px;
-            transform: rotate(90deg);
-            height: 30px;
-        }
-        .go-back{
-            margin-top: 10px;
-            font-size: 16px;
-            font-weight: 600;
-            color: ${({ theme }) => theme.colors.greyscale.white};
-            display: flex;
-            align-items: center;
-            gap: 12px;
         }
     }
 `

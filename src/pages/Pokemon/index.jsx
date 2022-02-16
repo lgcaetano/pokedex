@@ -7,6 +7,7 @@ import pokeballImg from "../../assets/pokeball/Pokeball.svg"
 import goBackSrc from "../../assets/icons/DownwardsArrow.svg"
 import PokemonData from "../../components/PokemonData"
 import { Link } from "react-router-dom"
+import GoBackButton from "../../components/GoBackButton"
 
 const Pokemon = () => {
 
@@ -33,15 +34,7 @@ const Pokemon = () => {
       <Layout color={mainType}>
         <S.Pokemon color={mainType}>
           <div className="left-panel">
-            <Link to="/" className="go-back">
-              <div className="img-container">
-                <img src={goBackSrc} alt="" className="arrow"/>
-              </div>
-              <div className="text">
-                  Voltar
-              </div>
-            </Link>
-            <button className="about"></button>
+            <GoBackButton></GoBackButton>
             <img src={pokeballImg} alt="" className="pokeball" />
             <img src={pokemonImgSrc} alt="" className="pokemon-photo" />
           </div>

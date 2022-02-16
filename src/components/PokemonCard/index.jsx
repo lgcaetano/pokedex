@@ -37,7 +37,7 @@ const PokemonCard = (props) => {
 
 
     return (
-      <Link to={`pokemon/${data?.id}`}>
+      <Link to={`/pokemon/${data?.id}`}>
         <S.StyledPokemonCard {...data} type={types[0] ?? ""} dark={darkMode}>
           <div className="img-container">
             <div className="id-container">

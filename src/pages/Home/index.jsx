@@ -11,7 +11,7 @@ const Home = () => {
     return (
         <Layout>
             <SearchBar changeFilter={e => setFilter(e.target.value)}></SearchBar>
-            <PokemonGrid filter={filter}></PokemonGrid>
+            <PokemonGrid filterFunction={e => e.name.includes(filter)}></PokemonGrid>
         </Layout>
     )
 }
