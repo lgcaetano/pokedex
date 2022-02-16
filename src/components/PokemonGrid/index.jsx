@@ -3,6 +3,10 @@ import PokemonCard from "../PokemonCard"
 import * as S from "./styles"
 import { useSelector, useDispatch } from "react-redux"
 import { GET_MORE_POKEMONS } from "../../store/slices/pokemonSlice"
+import FadeLoader from "react-spinners/FadeLoader"
+import { css } from "styled-components"
+
+
 
 function addInfiniteScrollListener(callback) {
     window.onscroll = () => {
@@ -24,7 +28,11 @@ const PokemonGrid = (props) => {
 
     const { pokemonList, isLoading } = useSelector(({ pokemons }) => pokemons)
 
-    console.log(pokemonList)
+    const loaderStyles = css`
+        display: ${isLoading ? "initial" : "none"};
+        align-self: center;
+        grid-column: 1 / span 4;
+    `
 
     addInfiniteScrollListener(() => {
         if(!isLoading)
@@ -46,10 +54,13 @@ const PokemonGrid = (props) => {
 
 
     return (
-        <S.styledGrid>
-            {generateCards()}
-        </S.styledGrid>
-    )
+      <S.styledGrid>
+        {generateCards()}
+        <div className="loader-container">
+          <FadeLoader css={loaderStyles} size={100} color="green"></FadeLoader>
+        </div>
+      </S.styledGrid>
+    );
 }
 
 export default PokemonGrid
