@@ -1,47 +1,50 @@
-import Layout from "../../components/Layout"
-import { useParams } from "react-router-dom"
-import { useEffect, useState } from "react"
-import api from "../../services/api"
-import * as S from "./styles"
-import pokeballImg from "../../assets/pokeball/Pokeball.svg"
-import goBackSrc from "../../assets/icons/DownwardsArrow.svg"
-import PokemonData from "../../components/PokemonData"
-import { Link } from "react-router-dom"
-import GoBackButton from "../../components/GoBackButton"
+import Layout from "../../components/Layout";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import api from "../../services/api";
+import * as S from "./styles";
+import pokeballImg from "../../assets/pokeball/Pokeball.png";
+import PokemonData from "../../components/PokemonData";
+import GoBackButton from "../../components/GoBackButton";
 
 const Pokemon = () => {
+  const { id } = useParams();
 
-    const { id } = useParams()
+  const [data, setData] = useState(null);
 
-    const [data, setData] = useState(null)
 
-    useEffect(() => {
-        async function fetchPokemonData(){
-            const { data } = await api.get(`/pokemon/${id}`)
-            const { data: flavor_text_entries } = await api.get(`/pokemon-species/${id}`)
-            setData({...data, bio: flavor_text_entries})
-            console.log(data)
-            console.log(flavor_text_entries)
-        }
-        fetchPokemonData()
-    }, [id])
+  useEffect(() => {
 
-    const mainType = data?.types[0].type.name
+    if(data) return
 
-    const pokemonImgSrc = data?.sprites.other.dream_world.front_default
+    async function fetchPokemonData() {
+      const { data } = await api.get(`/pokemon/${id}`);
+      const { data: flavor_text_entries } = await api.get(
+        `/pokemon-species/${id}`
+      );
+      setData({ ...data, bio: flavor_text_entries });
+    }
+    fetchPokemonData();
+  }, [id, data]);
 
-    return (
-      <Layout color={mainType}>
-        <S.Pokemon color={mainType}>
-          <div className="left-panel">
+  const mainType = data?.types[0].type.name;
+
+  const pokemonImgSrc = data?.sprites.other.dream_world.front_default;
+
+  return (
+    <Layout color={mainType} pokemonPage={true}>
+      <S.Pokemon color={mainType}>
+        <div className="left-panel">
+          <div className="buttons-container">
             <GoBackButton></GoBackButton>
-            <img src={pokeballImg} alt="" className="pokeball" />
-            <img src={pokemonImgSrc} alt="" className="pokemon-photo" />
           </div>
-          <PokemonData data={data} color={mainType} />
-        </S.Pokemon>
-      </Layout>
-    );
-}
+          <img src={pokeballImg} alt="" className="pokeball" />
+          <img src={pokemonImgSrc} alt="" className="pokemon-photo" />
+        </div>
+        <PokemonData data={data} color={mainType} />
+      </S.Pokemon>
+    </Layout>
+  );
+};
 
-export default Pokemon
+export default Pokemon;

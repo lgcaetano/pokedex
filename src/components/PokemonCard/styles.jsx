@@ -20,7 +20,7 @@ const StyledPokemonCard = styled.div`
         ? theme.colors.greyscale.darkGray
         : theme.colors.greyscale.background};
     width: 100%;
-    height: 115px;
+    height: 80%;
     border-radius: inherit;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
@@ -45,6 +45,12 @@ const StyledPokemonCard = styled.div`
     top: 5px;
     color: ${getMainColor};
     font-size: 12px;
+  }
+
+  @media(max-width: ${({ theme }) => theme.breakpoints.midSmall}){
+    width: 104px;
+    height: 112px;
+    font-size: 0.8em;
   }
 `;
 

@@ -10,16 +10,17 @@ const Favorites = () => {
     const { favorites } = useSelector(({ favorites }) => favorites)
 
     return (
-        <Layout>
-            <S.FavoritesBar>
-                <GoBackButton></GoBackButton>
-                <FavoritesButton></FavoritesButton>
-            </S.FavoritesBar>
-            <PokemonGrid filterFunction={
-                e => favorites.includes(e.name)  
-            }></PokemonGrid>
-        </Layout>
-    )
+      <Layout>
+        <S.FavoritesBar>
+          <GoBackButton></GoBackButton>
+          <FavoritesButton alwaysShowTitle={true}></FavoritesButton>
+        </S.FavoritesBar>
+        <PokemonGrid
+          filterFunction={(e) => favorites.includes(e.name)}
+          static={true}
+        ></PokemonGrid>
+      </Layout>
+    );
 }
 
 export default Favorites

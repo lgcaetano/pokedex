@@ -36,6 +36,29 @@ const StyledTopBar = styled.nav`
       transform: ${({ dark }) => dark ? "translateX(100%)" : ""};
     }
   }
+  @media(max-width: ${({ theme }) => theme.breakpoints.mid}){
+    width: ${({ theme }) => theme.dimensions.midGridWidth};
+  }
+
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.midSmall}) {
+    width: ${({ theme }) => theme.dimensions.midSmallGridWidth};
+  }
+
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.pokemonPage}) {
+    display: ${({ pokemon }) => pokemon ? "none" : "flex"};
+    width: ${({ theme }) => theme.dimensions.smallGridWidth};
+  }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.verySmall}) {
+    width: ${({ theme }) => theme.dimensions.verySmallGridWidth};
+    .title{
+      span{
+        display: none;
+      }
+    }
+  }
 `;
 
 export { StyledTopBar }

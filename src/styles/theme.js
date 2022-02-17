@@ -25,6 +25,7 @@ const theme = {
             mediumGray: "#666666",
             buttonGray: "#8D8B92",
             dataTitleGray: "#B2B2B2",
+            noPokemonGray: "#BDBDBD",
             lightGray: "#E0E0E0",
             white: "#FFFFFF",
             background: "#F7F7F7"
@@ -34,7 +35,18 @@ const theme = {
         }
     },
     dimensions:{
-        gridWidth: "950px"
+        gridWidth: "950px",
+        midGridWidth: "700px",
+        midSmallGridWidth: "500px",
+        smallGridWidth: "350px",
+        verySmallGridWidth: "230px"
+    },
+    breakpoints: {
+        mid: "1050px",
+        midSmall: "800px",
+        pokemonPage: "630px",
+        small: "370px",
+        verySmall: "300px"
     }
 }
 

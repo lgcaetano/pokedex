@@ -15,6 +15,25 @@ const FavoritesBar = styled.div`
     left: 0;
     transform: translateY(-75%);
   }
+  
+  @media(max-width: ${({ theme }) => theme.breakpoints.mid}){
+    width: ${({ theme }) => theme.dimensions.midGridWidth};
+  }
+
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.midSmall}) {
+    width: ${({ theme }) => theme.dimensions.midSmallGridWidth};
+  }
+
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.pokemonPage}) {
+    width: ${({ theme }) => theme.dimensions.smallGridWidth};
+  }
+
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.verySmall}) {
+    width: ${({ theme }) => theme.dimensions.verySmallGridWidth};
+  }
 `;
 
 export { FavoritesBar }

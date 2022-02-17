@@ -16,6 +16,11 @@ const GoBack = styled.div`
     align-items: center;
     gap: 12px;
   }
+  @media (max-width: ${({ theme }) => theme.breakpoints.verySmall}) {
+    .text {
+      display: none;
+    }
+  }
 `;
 
 export { GoBack }

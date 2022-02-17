@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { GET_MORE_POKEMONS } from "../../store/slices/pokemonSlice"
 import FadeLoader from "react-spinners/FadeLoader"
 import { css } from "styled-components"
+import NoPokemonFound from "../NoPokemonFound"
 
 
 
@@ -29,13 +30,14 @@ const PokemonGrid = (props) => {
     const { pokemonList, isLoading } = useSelector(({ pokemons }) => pokemons)
 
     const loaderStyles = css`
-        display: ${isLoading ? "initial" : "none"};
-        align-self: center;
-        grid-column: 1 / span 4;
-    `
+      transition: 0 all;
+      display: ${isLoading ? "initial" : "none"};
+      align-self: center;
+      grid-column: 1 / span 4;
+    `;
 
     addInfiniteScrollListener(() => {
-        if(!isLoading)
+        if(!(isLoading || props.static))
             dispatch(GET_MORE_POKEMONS())
     })
 
@@ -44,11 +46,24 @@ const PokemonGrid = (props) => {
     }, [dispatch])
 
     const generateCards = () => {
-        return pokemonList?.filter(props.filterFunction).map(element => { 
+
+        const cards = pokemonList
+          ?.filter(props.filterFunction)
+          .map((element) => {
             return (
-                <PokemonCard name={element.name} url={element.url} key={element.name}/>
-            )
-        })
+              <PokemonCard
+                name={element.name}
+                url={element.url}
+                key={element.name}
+              />
+            );
+          });
+
+          if(cards.length <= 0){
+            return <NoPokemonFound/>
+          }
+
+        return cards
     }
 
 
@@ -57,7 +72,15 @@ const PokemonGrid = (props) => {
       <S.styledGrid>
         {generateCards()}
         <div className="loader-container">
-          <FadeLoader css={loaderStyles} size={100} color="green"></FadeLoader>
+          {props.static ? (
+            ""
+          ) : (
+            <FadeLoader
+              css={loaderStyles}
+              size={100}
+              color={isLoading ? "green" : "transparent"}
+            ></FadeLoader>
+          )}
         </div>
       </S.styledGrid>
     );

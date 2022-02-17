@@ -3,7 +3,9 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     isLoading: false,
     pokemonList: [],
-    nextPage: "https://pokeapi.co/api/v2/pokemon/?limit=20&offset=0"
+    nextPage: "https://pokeapi.co/api/v2/pokemon/?limit=20&offset=0",
+    searchedPages: [], 
+    allPokemonData: {}
 }
 
 const pokemonSlice = createSlice({
@@ -17,7 +19,6 @@ const pokemonSlice = createSlice({
             
             const newData = action.payload.data
 
-            console.log(state.nextPage)
 
             if(newData.error)
                 return {...state, isLoading: false, error: newData.error}
@@ -25,7 +26,21 @@ const pokemonSlice = createSlice({
                 ...state,
                 isLoading: false,
                 pokemonList: [...state.pokemonList, ...newData.results],
+                searchedPages: [...state.searchedPages, state.nextPage],
                 nextPage: newData.next
+            }
+        },
+        SET_POKEMON_DATA: (state, { payload }) => {
+
+            const data = payload
+            const name = payload.name
+
+            return {
+                ...state, 
+                allPokemonData: {
+                    ...state.allPokemonData,
+                    [name]: data
+                }
             }
         }
     }
@@ -33,6 +48,6 @@ const pokemonSlice = createSlice({
 
 const { actions, reducer } = pokemonSlice
 
-export const { GET_MORE_POKEMONS, SET_MORE_POKEMONS } = actions
+export const { GET_MORE_POKEMONS, SET_MORE_POKEMONS, SET_POKEMON_DATA } = actions
 
 export default reducer

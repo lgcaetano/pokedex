@@ -5,6 +5,9 @@ const Container = styled.div`
   flex-direction: column;
   gap: 20px;
   margin-left: 150px;
+  border-radius: 15px;
+  background: ${({ theme, dark }) =>
+      dark ? theme.colors.greyscale.darkGray : theme.colors.greyscale.background};;
   .colorful {
     color: ${({ theme, color }) => theme.colors.pokemonTypes[color]};
   }
@@ -31,6 +34,19 @@ const Container = styled.div`
   .bio {
     color: ${({ theme, dark }) =>
       dark ? theme.colors.greyscale.white : "initial"};
+  }
+  @media (max-width: ${({ theme }) => theme.breakpoints.pokemonPage}) {
+    gap: 15px;
+    max-height: 70vh;
+    font-size: 0.8rem;
+    position: relative;
+    left: 0;
+    top: 25vh;
+    padding: 30px;
+    margin: 0 5px;
+    .basic-data{
+      gap: 10px;
+    }
   }
 `;
 

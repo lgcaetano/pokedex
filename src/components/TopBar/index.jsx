@@ -5,13 +5,13 @@ import { useDispatch } from 'react-redux'
 import { TOGGLE_THEME } from '../../store/slices/ThemeSlice'
 
 
-const TopBar = () => {
+const TopBar = ({pokemon}) => {
 
     const { darkMode } = useSelector(({ theme }) => theme)
     const dispatch = useDispatch()
 
     return (
-        <S.StyledTopBar dark={darkMode}>
+        <S.StyledTopBar dark={darkMode} pokemon={pokemon}>
             <div className="title">
                 <img src={logo} alt="" className="logo"/>
                 <span>ioasys pokédex</span>

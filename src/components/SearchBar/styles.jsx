@@ -21,6 +21,26 @@ const Container = styled.div`
     color: ${({ theme }) => theme.colors.ioasys.secondary};
     font-weight: 500;
   }
+
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.mid}) {
+    width: ${({ theme }) => theme.dimensions.midGridWidth};
+  }
+
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.midSmall}) {
+    width: ${({ theme }) => theme.dimensions.midSmallGridWidth};
+  }
+
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.pokemonPage}) {
+    width: ${({ theme }) => theme.dimensions.smallGridWidth};
+  }
+
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.verySmall}) {
+    width: ${({ theme }) => theme.dimensions.verySmallGridWidth};
+  }
 `;
 
 const SearchBar = styled.input`
@@ -30,6 +50,7 @@ const SearchBar = styled.input`
     color: ${({ theme }) => theme.colors.greyscale.mediumGray};
     padding: 0 35px;
     height: 54px;
+    max-width: calc(100% - 50px);
     flex-grow: 1;
     border-radius: 5px;
     outline: none;

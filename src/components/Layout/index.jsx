@@ -8,9 +8,9 @@ const Layout = (props) => {
 
 
     return (
-      <S.StyledLayout dark={darkMode} curColor={props.color}>
+      <S.StyledLayout dark={darkMode} curColor={props.color} >
         <div className="container">
-          <TopBar />
+          <TopBar pokemon={props.pokemonPage}/>
           <div className="content">{props.children}</div>
         </div>
       </S.StyledLayout>

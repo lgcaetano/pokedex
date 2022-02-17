@@ -12,6 +12,8 @@ const icons = {
 
 
 function upperCaseFirstLetter(str){
+    if(!str)
+      return
     return str.charAt(0).toUpperCase() + str.slice(1)
 }
 
@@ -28,8 +30,8 @@ const BasicPokemonData = ({ data, dataType }) => {
         switch (dataType) {
           case "abilities":
             return `${upperCaseFirstLetter(
-              data.abilities[0].ability.name
-            )} / ${upperCaseFirstLetter(data.abilities[1].ability.name)}`;
+              data.abilities[0]?.ability.name
+            )} / ${upperCaseFirstLetter(data.abilities[1]?.ability.name)}`;
 
           case "height":
             return `${data.height / 10} m`;
