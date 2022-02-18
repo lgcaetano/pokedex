@@ -59,10 +59,10 @@ const PokemonGrid = (props) => {
           if(newLimit < pokemonList.length)
             return
 
-          if (!(isLoading || props.static)) 
+          if (!props.static) 
             dispatch(GET_MORE_POKEMONS())
         })
-    }, [dispatch])
+    }, [dispatch, pokemonList.length, props.static])
 
     const generateCards = () => {
 
