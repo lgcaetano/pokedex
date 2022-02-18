@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     isLoading: false,
     pokemonList: [],
-    nextPage: "https://pokeapi.co/api/v2/pokemon/?limit=20&offset=0",
+    nextPage: "https://pokeapi.co/api/v2/pokemon/?limit=50&offset=0",
     searchedPages: [], 
     allPokemonData: {}
 }

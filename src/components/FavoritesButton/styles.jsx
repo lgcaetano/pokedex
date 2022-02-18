@@ -18,7 +18,7 @@ const Container = styled.div`
     margin-left: 20px;
     margin-right: 20px;
     span {
-      display: ${({ showTitle }) => (showTitle ? "initial" : "none")};
+      display: ${({ favoritesPage }) => favoritesPage ? "initial" : "none"};
     }
   }
   @media (max-width: ${({ theme }) => theme.breakpoints.verySmall}) {

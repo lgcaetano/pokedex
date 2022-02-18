@@ -7,7 +7,10 @@ const Container = styled.div`
   margin-left: 150px;
   border-radius: 15px;
   background: ${({ theme, dark }) =>
-      dark ? theme.colors.greyscale.darkGray : theme.colors.greyscale.background};;
+      dark ? theme.colors.greyscale.darkGray : theme.colors.greyscale.background};
+  .heart{
+    position: relative;
+  }
   .colorful {
     color: ${({ theme, color }) => theme.colors.pokemonTypes[color]};
   }

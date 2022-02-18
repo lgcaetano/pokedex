@@ -21,6 +21,21 @@ const Container = styled.div`
     color: ${({ theme }) => theme.colors.ioasys.secondary};
     font-weight: 500;
   }
+  .search-icon{
+    position: absolute;
+    height: 20px;
+    right: 220px;
+    z-index: 10;
+    img{
+      height: 100%;
+    }
+    &:disabled{
+      cursor: default;
+      img{
+        cursor: default;
+      }
+    }
+  }
 
   
   @media (max-width: ${({ theme }) => theme.breakpoints.mid}) {
@@ -35,6 +50,9 @@ const Container = styled.div`
   
   @media (max-width: ${({ theme }) => theme.breakpoints.pokemonPage}) {
     width: ${({ theme }) => theme.dimensions.smallGridWidth};
+    .search-icon{
+      display: none;
+    }
   }
 
   

@@ -4,9 +4,11 @@ import fullHeartSrc from "../../assets/icons/FilledHeart.svg"
 import hollowHeartSrc from "../../assets/icons/HollowHeart.svg"
 import BasicPokemonData from "../BasicPokemonData"
 import PokemonStat from "../PokemonStat"
+import FavoritesTooltip from "../FavoritesTooltip"
 import { useSelector } from "react-redux"
 import { useDispatch } from "react-redux"
 import { SET_NEW_FAVORITE, REMOVE_FAVORITE } from "../../store/slices/FavoritesSlice"
+import { useState } from "react"
 
 
 function upperCaseFirstLetter(str){
@@ -34,30 +36,35 @@ const PokemonData = ({ data, color }) => {
 
     const dispatch = useDispatch()
 
+    const [favoritesTooltip, setFavoritesTooltip] = useState(false)
+
     const { favorites } = useSelector(({ favorites }) => favorites)
     const { darkMode } = useSelector(({ theme }) => theme)
 
     const isFavorite = () => {
-        return favorites.includes(data?.name)
+        return favorites.find(e => e[0] === data?.name)
     }
 
     const toggleFavorite = () => {
         if(isFavorite()){
             dispatch(REMOVE_FAVORITE(data.name))
-        } else{
-            dispatch(SET_NEW_FAVORITE(data.name))
+            return
+        } if(favorites.length >= 12){
+          setFavoritesTooltip(true)
+          setTimeout(() => setFavoritesTooltip(false), 4000)
+          return
         }
+        dispatch(SET_NEW_FAVORITE([data.name, data.id]));
     }
 
     const pokemonBio = data && data.bio ? findFirstEnglishBio(data?.bio?.flavor_text_entries) : ""
-
-    console.log(data?.bio)
 
 
     return (
       <S.Container color={color} dark={darkMode}>
         <div className="main-info">
           <button className="heart" onClick={toggleFavorite}>
+            <FavoritesTooltip activated={favoritesTooltip} />
             <img src={isFavorite() ? fullHeartSrc : hollowHeartSrc} alt="" />
           </button>
           <h1 className="colorful pokemon-name">
@@ -73,31 +80,27 @@ const PokemonData = ({ data, color }) => {
           })}
         </div>
         <div className="basic-data">
-            <BasicPokemonData data={data} dataType={"weight"}></BasicPokemonData>
-            <BasicPokemonData data={data} dataType={"height"}></BasicPokemonData>
-            <BasicPokemonData data={data} dataType={"abilities"}></BasicPokemonData>
+          <BasicPokemonData data={data} dataType={"weight"}></BasicPokemonData>
+          <BasicPokemonData data={data} dataType={"height"}></BasicPokemonData>
+          <BasicPokemonData
+            data={data}
+            dataType={"abilities"}
+          ></BasicPokemonData>
         </div>
-        <div className="bio">
-            {pokemonBio?.replace("\f", " ")} 
-        </div>
-        <h3 className="colorful">
-            Base Stats
-        </h3>
+        <div className="bio">{pokemonBio?.replace("\f", " ")}</div>
+        <h3 className="colorful">Base Stats</h3>
         <div className="stat-container">
-            {
-                data?.stats.map(({base_stat, stat}) => {
-                    return (
-                      <PokemonStat
-                        statName={stat.name}
-                        statValue={base_stat}
-                        key={stat.name}
-                        color={color}
-                      />
-                    );
-                })
-            }
+          {data?.stats.map(({ base_stat, stat }) => {
+            return (
+              <PokemonStat
+                statName={stat.name}
+                statValue={base_stat}
+                key={stat.name}
+                color={color}
+              />
+            );
+          })}
         </div>
-
       </S.Container>
     );
 }
