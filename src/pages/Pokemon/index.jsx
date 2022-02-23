@@ -29,13 +29,21 @@ const Pokemon = () => {
 
         const { data: pokemonData } = storeData ? { data: storeData } : await api.get(`/pokemon/${id}`);
 
-        const { data: flavor_text_entries } = await api.get(`/pokemon-species/${id}`);
-
-        setData({ ...pokemonData, bio: flavor_text_entries });
+        setData({ ...pokemonData });
 
       } catch(e){
         setError(true)
       }
+      try{
+        
+        const { data: flavor_text_entries } = await api.get(`/pokemon-species/${id}`);
+
+        setData({...data, bio: flavor_text_entries})
+
+      } catch(e){
+        console.log(e)
+      }
+
       setDataLoaded(true)
     }
     fetchPokemonData()
