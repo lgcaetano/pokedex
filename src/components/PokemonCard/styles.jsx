@@ -13,7 +13,7 @@ const StyledPokemonCard = styled.div`
   border-radius: 10.5px;
   overflow: hidden;
   .img-container {
-      position: relative;
+    position: relative;
     transition: 300ms all;
     background: ${({ theme, dark }) =>
       dark

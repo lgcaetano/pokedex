@@ -15,12 +15,6 @@ const pokemonSlice = createSlice({
         GET_MORE_POKEMONS: (state) => {
             return {...state, isLoading: true}
         },
-        STOP_LOADING: (state) => {
-            return {
-                ...state,
-                isLoading: false
-            }
-        },
         FETCH_MORE_POKEMONS_SUCCESS: (state, { payload }) => {
             
             const newData = payload.data
@@ -62,6 +56,6 @@ const pokemonSlice = createSlice({
 
 const { actions, reducer } = pokemonSlice
 
-export const { GET_MORE_POKEMONS, FETCH_MORE_POKEMONS_SUCCESS, FETCH_MORE_POKEMONS_FAILURE, SET_POKEMON_DATA, STOP_LOADING } = actions
+export const { GET_MORE_POKEMONS, FETCH_MORE_POKEMONS_SUCCESS, FETCH_MORE_POKEMONS_FAILURE, SET_POKEMON_DATA } = actions
 
 export default reducer

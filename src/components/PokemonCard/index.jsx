@@ -6,6 +6,7 @@ import { Link } from "react-router-dom"
 import { SET_POKEMON_DATA } from "../../store/slices/pokemonSlice"
 import { useDispatch } from "react-redux"
 import { FadeLoader } from "react-spinners"
+import { css } from "@emotion/react"
 
 function upperCaseFirstLetter(str){
     return str.charAt(0).toUpperCase() + str.slice(1)
@@ -57,13 +58,18 @@ const PokemonCard = ({ name, url }) => {
 
     const imgSrc = data?.sprites.other.dream_world.front_default 
 
+    const loaderStyles = css`
+      left: 25px;
+      top: 25px;
+    `;
+
 
     return (
       <Link to={`/pokemon/${data?.id}`}>
         <S.StyledPokemonCard type={types[0] ?? ""} dark={darkMode}>
           <div className="img-container">
             <div className="id-container">{`#${formatId(data?.id || "")}`}</div>
-            {!imageLoaded ? <FadeLoader color="green"/> : ""}
+            {!imageLoaded ? <FadeLoader color="green" css={loaderStyles}/> : ""}
             <img
               style={{ display: imageLoaded ? "initial" : "none" }}
               src={imgSrc}
