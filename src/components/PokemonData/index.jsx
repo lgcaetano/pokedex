@@ -82,10 +82,7 @@ const PokemonData = ({ data, color }) => {
         <div className="basic-data">
           <BasicPokemonData data={data} dataType={"weight"}></BasicPokemonData>
           <BasicPokemonData data={data} dataType={"height"}></BasicPokemonData>
-          <BasicPokemonData
-            data={data}
-            dataType={"abilities"}
-          ></BasicPokemonData>
+          <BasicPokemonData data={data} dataType={"abilities"}></BasicPokemonData>
         </div>
         <div className="bio">{pokemonBio?.replace("\f", " ")}</div>
         <h3 className="colorful">Base Stats</h3>

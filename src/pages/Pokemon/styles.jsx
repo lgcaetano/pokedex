@@ -36,7 +36,7 @@ const Pokemon = styled.div`
     display: flex;
     flex-direction: column;
     padding: 0;
-    min-height: 100vh;
+    min-height: 650px;
     height: max-content;
     background: ${({ theme, color }) => theme.colors.pokemonTypes[color]};
     .buttons-container{

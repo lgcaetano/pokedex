@@ -22,17 +22,23 @@ function addInfiniteScrollListener(ref, callback) {
             callback()
     }, observerOptions)
     observer.observe(ref)
+
+    return observer
 }
 
 const PokemonGrid = (props) => {
 
     const dispatch = useDispatch()
 
-    const { pokemonList, isLoading } = useSelector(({ pokemons }) => pokemons)
+    const { pokemonList, isLoading, nextPage } = useSelector(({ pokemons }) => pokemons)
+
+    const isListFull = !nextPage
 
     const [limit, setLimit] = useState(20)
 
     const limitRef = useRef(20)
+
+    const observerRef = useRef()
 
     useEffect(() => limitRef.current = limit, [limit])
 
@@ -45,12 +51,16 @@ const PokemonGrid = (props) => {
       grid-column: 1 / span 4;
     `;
 
+    useEffect(() => {
+      dispatch(GET_MORE_POKEMONS())
+    }, [dispatch])
 
 
     useEffect(() => {
-        dispatch(GET_MORE_POKEMONS())
-        
-        addInfiniteScrollListener(loaderRef.current, () => {
+
+        observerRef.current?.unobserve(loaderRef.current)
+
+        observerRef.current = addInfiniteScrollListener(loaderRef.current, () => {
           
           const newLimit = limitRef.current + 20
 
@@ -62,7 +72,7 @@ const PokemonGrid = (props) => {
           if (!props.static) 
             dispatch(GET_MORE_POKEMONS())
         })
-    }, [dispatch, pokemonList.length, props.static])
+    }, [dispatch, pokemonList, props.static])
 
     const generateCards = () => {
 
@@ -78,13 +88,15 @@ const PokemonGrid = (props) => {
             );
           }).slice(0, limit);
 
-          if(cards.length <= 0){
+          if(cards.length <= 0 && !isLoading){
+            if(!isListFull){
+              dispatch(GET_MORE_POKEMONS())
+            }
             return <NoPokemonFound/>
           }
 
         return cards
     }
-
 
 
     return (
@@ -97,7 +109,7 @@ const PokemonGrid = (props) => {
             <FadeLoader
               css={loaderStyles}
               size={100}
-              color={isLoading ? "green" : "transparent"}
+              color={isLoading && !isListFull ? "green" : "transparent"}
             ></FadeLoader>
           )}
         </div>

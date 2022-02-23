@@ -64,7 +64,7 @@ const Container = styled.div`
 const SearchBar = styled.input`
     background: transparent;
     border: 2px solid ${({ theme }) => theme.colors.ioasys.secondary};
-    font-size: 16px;
+    font-size: ${({ theme }) => theme.fontSizes.large};
     color: ${({ theme }) => theme.colors.greyscale.mediumGray};
     padding: 0 35px;
     height: 54px;

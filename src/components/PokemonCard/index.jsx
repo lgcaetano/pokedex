@@ -5,6 +5,7 @@ import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import { SET_POKEMON_DATA } from "../../store/slices/pokemonSlice"
 import { useDispatch } from "react-redux"
+import { FadeLoader } from "react-spinners"
 
 function upperCaseFirstLetter(str){
     return str.charAt(0).toUpperCase() + str.slice(1)
@@ -26,6 +27,7 @@ const PokemonCard = ({ name, url }) => {
     const { darkMode } = useSelector(({ theme }) => theme)
     const { allPokemonData } = useSelector(({ pokemons }) => pokemons)
 
+    const [imageLoaded, setImageLoaded] = useState(false)
     const [data, setData] = useState()
     const [types, setTypes] = useState([])
 
@@ -58,12 +60,16 @@ const PokemonCard = ({ name, url }) => {
 
     return (
       <Link to={`/pokemon/${data?.id}`}>
-        <S.StyledPokemonCard {...data} type={types[0] ?? ""} dark={darkMode}>
+        <S.StyledPokemonCard type={types[0] ?? ""} dark={darkMode}>
           <div className="img-container">
-            <div className="id-container">
-                {`#${formatId(data?.id || "")}`}
-            </div>
-            <img src={imgSrc} alt="" />
+            <div className="id-container">{`#${formatId(data?.id || "")}`}</div>
+            {!imageLoaded ? <FadeLoader color="green"/> : ""}
+            <img
+              style={{ display: imageLoaded ? "initial" : "none" }}
+              src={imgSrc}
+              alt={`${upperCaseFirstLetter(name)}`}
+              onLoad={() => setImageLoaded(true)}
+            />
           </div>
           <div className="name">{upperCaseFirstLetter(name)}</div>
         </S.StyledPokemonCard>

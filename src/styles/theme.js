@@ -47,6 +47,14 @@ const theme = {
         pokemonPage: "630px",
         small: "370px",
         verySmall: "300px"
+    },
+    fontSizes: {
+        title: "28px",
+        large: "16px",
+        mid: "12px",
+        small: "10px",
+        veryLarge: "22px",
+        noPokemonFoundWarning: "148px" 
     }
 }
 

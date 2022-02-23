@@ -19,7 +19,7 @@ const Container = styled.div`
     align-items: center;
   }
   .pokemon-name {
-    font-size: 24px;
+    font-size: ${({ theme }) => theme.fontSizes.veryLarge};
     margin: 0 20px;
   }
   .pokemon-id {
@@ -32,7 +32,8 @@ const Container = styled.div`
   }
   .basic-data {
     display: flex;
-    gap: 20px;
+    align-self: stretch;
+    justify-content: space-around;
   }
   .bio {
     color: ${({ theme, dark }) =>
@@ -41,12 +42,12 @@ const Container = styled.div`
   @media (max-width: ${({ theme }) => theme.breakpoints.pokemonPage}) {
     gap: 15px;
     max-height: 70vh;
-    font-size: 0.8rem;
+    font-size: ${({ theme }) => theme.fontSizes.mid};
     position: relative;
     left: 0;
     top: 25vh;
     padding: 30px;
-    margin: 0 5px;
+    margin: 0px 5px;
     .basic-data{
       gap: 10px;
     }

@@ -4,7 +4,7 @@ const Data = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 14px;
+  font-size: ${({ theme }) => theme.fontSizes.large};
 
   color: ${({ theme, dark }) =>
     dark ? theme.colors.greyscale.white : "initial"};
@@ -13,13 +13,13 @@ const Data = styled.div`
     margin-right: 10px;
   }
   .data-title {
-    font-size: 12px;
+    font-size: ${({ theme }) => theme.fontSizes.mid};
     color: ${({ theme }) => theme.colors.greyscale.dataTitleGray};
   }
   @media (max-width: ${({ theme }) => theme.breakpoints.midSmall}) {
-    font-size: 12px;
+    font-size: ${({ theme }) => theme.fontSizes.mid};
     .data-title{
-      font-size: 10px
+      font-size: ${({ theme }) => theme.fontSizes.small};
     }
     img{
       margin-right: 5px;

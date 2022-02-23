@@ -10,11 +10,11 @@ const Ops = styled.div`
   align-items: center;
 
   .ops {
-    font-size: 148px;
+    font-size: ${({ theme }) => theme.fontSizes.noPokemonFoundWarning};
     font-weight: 700;
   }
   .message {
-    font-size: 22px;
+    font-size: ${({ theme }) => theme.fontSizes.veryLarge};
     font-weight: 600;
     @media (min-width: ${({ theme }) => theme.breakpoints.midSmall}) {
       position: relative;

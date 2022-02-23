@@ -10,7 +10,7 @@ const StyledTopBar = styled.nav`
   .title {
     height: 28px;
     display: flex;
-    font-size: 28px;
+    font-size: ${({ theme }) => theme.fontSizes.title};
     font-weight: 700;
     line-height: 32px;
   }

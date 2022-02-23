@@ -11,7 +11,7 @@ const Container = styled.div`
     color: ${({ theme }) => theme.colors.ioasys.secondary};
     display: ${({ hideTitle }) => (hideTitle ? "none" : "initial")};
     font-weight: 500;
-    font-size: 14px;
+    font-size: ${({ theme }) => theme.fontSizes.mid};
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.pokemonPage}) {

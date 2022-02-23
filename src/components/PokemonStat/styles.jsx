@@ -11,7 +11,7 @@ const Stat = styled.div`
     color: ${({ theme, dark }) =>
       dark ? theme.colors.greyscale.white : "initial"};
 
-    font-size: 12px;
+    font-size: ${({ theme }) => theme.fontSizes.mid};
     display: flex;
     justify-content: center;
     width: 50px;

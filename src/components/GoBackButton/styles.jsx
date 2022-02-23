@@ -9,7 +9,7 @@ const GoBack = styled.div`
   }
   .go-back {
     margin-top: 10px;
-    font-size: 16px;
+    font-size: ${({ theme }) => theme.fontSizes.large};
     font-weight: 600;
     color: ${({ theme }) => theme.colors.greyscale.white};
     display: flex;

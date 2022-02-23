@@ -7,6 +7,8 @@ import * as S from "./styles";
 import pokeballImg from "../../assets/pokeball/Pokeball.png";
 import PokemonData from "../../components/PokemonData";
 import GoBackButton from "../../components/GoBackButton";
+import NoPokemonFound from "../../components/NoPokemonFound";
+import { FadeLoader } from "react-spinners";
 
 const Pokemon = () => {
   const { id } = useParams();
@@ -15,24 +17,48 @@ const Pokemon = () => {
 
   const [data, setData] = useState(storeData);
 
-  console.log(data)
+  const [dataLoaded, setDataLoaded] = useState(false)
 
+  const [error, setError] = useState(false);
 
   useEffect(() => {
 
     async function fetchPokemonData() {
-      const { data } = storeData ? { data: storeData } : await api.get(`/pokemon/${id}`);
-      const { data: flavor_text_entries } = await api.get(
-        `/pokemon-species/${id}`
-      );
-      setData({ ...data, bio: flavor_text_entries });
+      try{
+
+        const { data: pokemonData } = storeData ? { data: storeData } : await api.get(`/pokemon/${id}`);
+
+        const { data: flavor_text_entries } = await api.get(`/pokemon-species/${id}`);
+
+        setData({ ...pokemonData, bio: flavor_text_entries });
+
+      } catch(e){
+        setError(true)
+      }
+      setDataLoaded(true)
     }
-    fetchPokemonData();
+    fetchPokemonData()
   }, [id, storeData]);
 
   const mainType = data?.types[0].type.name;
 
   const pokemonImgSrc = data?.sprites.other.dream_world.front_default;
+
+
+  if(error)
+    return (
+      <Layout>
+        <NoPokemonFound/>
+      </Layout>
+    )
+
+  if(!dataLoaded)
+      return (
+        <Layout>
+          <FadeLoader color={"green"}/>
+        </Layout>
+      )
+
 
   return (
     <Layout color={mainType} pokemonPage={true}>
