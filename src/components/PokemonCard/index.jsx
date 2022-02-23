@@ -31,6 +31,7 @@ const PokemonCard = ({ name, url }) => {
     const [imageLoaded, setImageLoaded] = useState(false)
     const [data, setData] = useState()
     const [types, setTypes] = useState([])
+    const [hasImage, setHasImage] = useState(true)
 
     const storeData = allPokemonData[name]
 
@@ -48,10 +49,12 @@ const PokemonCard = ({ name, url }) => {
       }
       
       const getData = async () => {
-        const pokemonData = await axios.get(url)
-        dispatch(SET_POKEMON_DATA(pokemonData.data))
-        setData(pokemonData.data)
-        setTypes(pokemonData.data.types.map((e) => e.type.name))
+        const { data: pokemonData } = await axios.get(url)
+        dispatch(SET_POKEMON_DATA(pokemonData))
+        setData(pokemonData)
+        setTypes(pokemonData.types.map((e) => e.type.name))
+        const pokemonImage = pokemonData.sprites.other.dream_world.front_default
+        setHasImage(pokemonImage != null)
       }
       getData()
     }, [data, url, name, dispatch, storeData])
@@ -63,18 +66,18 @@ const PokemonCard = ({ name, url }) => {
       top: 25px;
     `;
 
-
     return (
       <Link to={`/pokemon/${data?.id}`}>
         <S.StyledPokemonCard type={types[0] ?? ""} dark={darkMode}>
           <div className="img-container">
             <div className="id-container">{`#${formatId(data?.id || "")}`}</div>
-            {!imageLoaded ? <FadeLoader color="green" css={loaderStyles}/> : ""}
+            {!imageLoaded && hasImage ? <FadeLoader color="green" css={loaderStyles}/> : ""}
             <img
-              style={{ display: imageLoaded ? "initial" : "none" }}
+              style={{ display: imageLoaded || !hasImage ? "initial" : "none" }}
               src={imgSrc}
               alt={`${upperCaseFirstLetter(name)}`}
               onLoad={() => setImageLoaded(true)}
+              onError={() => setImageLoaded(true)}
             />
           </div>
           <div className="name">{upperCaseFirstLetter(name)}</div>
