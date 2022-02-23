@@ -35,10 +35,10 @@ const Pokemon = () => {
         setError(true)
       }
       try{
-        
+
         const { data: flavor_text_entries } = await api.get(`/pokemon-species/${id}`);
 
-        setData({...data, bio: flavor_text_entries})
+        setData(data => ({ ...data, bio: flavor_text_entries }))
 
       } catch(e){
         console.log(e)
