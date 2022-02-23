@@ -6,6 +6,7 @@ const Container = styled.div`
   gap: 20px;
   margin-left: 150px;
   border-radius: 15px;
+  padding-bottom: 50px;
   background: ${({ theme, dark }) =>
       dark ? theme.colors.greyscale.darkGray : theme.colors.greyscale.background};
   .heart{

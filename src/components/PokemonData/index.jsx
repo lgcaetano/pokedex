@@ -70,9 +70,7 @@ const PokemonData = ({ data, color }) => {
           <h1 className="colorful pokemon-name">
             {data ? upperCaseFirstLetter(data.name) : false}
           </h1>
-          <h5 className="colorful pokemon-id">{`#${formatId(
-            data?.id || ""
-          )}`}</h5>
+          <h5 className="colorful pokemon-id">{`#${formatId(data?.id || "")}`}</h5>
         </div>
         <div className="types">
           {data?.types.map(({ type }) => {

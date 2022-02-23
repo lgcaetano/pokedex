@@ -8,7 +8,7 @@ import pokeballImg from "../../assets/pokeball/Pokeball.png";
 import PokemonData from "../../components/PokemonData";
 import GoBackButton from "../../components/GoBackButton";
 import NoPokemonFound from "../../components/NoPokemonFound";
-import { FadeLoader } from "react-spinners";
+import PokeballLoader from "../../components/PokeballLoader";
 
 const Pokemon = () => {
   const { id } = useParams();
@@ -55,7 +55,7 @@ const Pokemon = () => {
   if(!dataLoaded)
       return (
         <Layout>
-          <FadeLoader color={"green"}/>
+          <PokeballLoader/>
         </Layout>
       )
 

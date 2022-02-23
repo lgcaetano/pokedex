@@ -5,8 +5,7 @@ import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import { SET_POKEMON_DATA } from "../../store/slices/pokemonSlice"
 import { useDispatch } from "react-redux"
-import { FadeLoader } from "react-spinners"
-import { css } from "@emotion/react"
+import PokeballLoader from "../PokeballLoader"
 import NoPokemonFound from "../NoPokemonImage"
 
 function upperCaseFirstLetter(str){
@@ -62,10 +61,6 @@ const PokemonCard = ({ name, url }) => {
 
     const imgSrc = data?.sprites.other.dream_world.front_default 
 
-    const loaderStyles = css`
-      left: 25px;
-      top: 25px;
-    `;
 
     const mainType = types[0] ?? ""
 
@@ -74,7 +69,7 @@ const PokemonCard = ({ name, url }) => {
         <S.StyledPokemonCard type={mainType} dark={darkMode}>
           <div className="img-container">
             <div className="id-container">{`#${formatId(data?.id || "")}`}</div>
-            {!imageLoaded && hasImage ? <FadeLoader color="green" css={loaderStyles}/> : ""}
+            {!imageLoaded && hasImage ? <PokeballLoader/> : ""}
             {!hasImage ? <NoPokemonFound type={mainType}/> : ""}
             <img
               style={{ display: imageLoaded && hasImage ? "initial" : "none" }}

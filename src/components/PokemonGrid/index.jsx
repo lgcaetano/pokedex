@@ -3,9 +3,8 @@ import PokemonCard from "../PokemonCard"
 import * as S from "./styles"
 import { useSelector, useDispatch } from "react-redux"
 import { GET_MORE_POKEMONS } from "../../store/slices/pokemonSlice"
-import FadeLoader from "react-spinners/FadeLoader"
-import { css } from "styled-components"
 import NoPokemonFound from "../NoPokemonFound"
+import PokeballLoader from "../PokeballLoader"
 
 
 
@@ -45,13 +44,6 @@ const PokemonGrid = (props) => {
     useEffect(() => limitRef.current = limit, [limit])
 
     const loaderRef = useRef()
-
-    const loaderStyles = css`
-      transition: 0 all;
-      display: ${isLoading ? "initial" : "none"};
-      align-self: center;
-      grid-column: 1 / span 4;
-    `;
 
     useEffect(() => {
       dispatch(GET_MORE_POKEMONS())
@@ -110,15 +102,7 @@ const PokemonGrid = (props) => {
       <S.styledGrid>
         {generateCards()}
         <div className="loader-container" ref={loaderRef}>
-          {props.static ? (
-            ""
-          ) : (
-            <FadeLoader
-              css={loaderStyles}
-              size={100}
-              color={isLoading && !isListFull ? "green" : "transparent"}
-            ></FadeLoader>
-          )}
+          {!props.static && isLoading && !isListFull ? <PokeballLoader /> : ""}
         </div>
       </S.styledGrid>
     );
