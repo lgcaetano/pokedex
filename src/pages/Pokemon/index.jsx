@@ -9,6 +9,7 @@ import PokemonData from "../../components/PokemonData";
 import GoBackButton from "../../components/GoBackButton";
 import NoPokemonFound from "../../components/NoPokemonFound";
 import PokeballLoader from "../../components/PokeballLoader";
+import PokemonMainInfo from "../../components/PokemonMainInfo";
 
 const Pokemon = () => {
   const { id } = useParams();
@@ -65,7 +66,12 @@ const Pokemon = () => {
       <S.Pokemon color={mainType}>
         <div className="left-panel">
           <div className="buttons-container">
-            <GoBackButton></GoBackButton>
+            <div className="go-back-container">
+              <GoBackButton />
+            </div>
+            <div className="main-info-container">
+              <PokemonMainInfo data={data} />
+            </div>
           </div>
           <img src={pokeballImg} alt="" className="pokeball" />
           <img src={pokemonImgSrc} alt="" className="pokemon-photo" />

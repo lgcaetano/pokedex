@@ -6,7 +6,7 @@ const Tooltip = styled.div`
   opacity: ${({ activated }) => (activated ? 1 : 0)};
   border-radius: 20px;
   position: absolute;
-  top: -50px;
+  bottom: -50px;
   z-index: ${({ activated }) => (activated ? 20 : -20)};
   background: ${({ theme }) => theme.colors.greyscale.mediumGray};
   color: ${({ theme }) => theme.colors.greyscale.white};
@@ -14,9 +14,9 @@ const Tooltip = styled.div`
   &:before{
       content: "";
       position: absolute;
-      top: 89%;
+      top: -12%;
       left: 7px;
-      clip-path: polygon(0% 0%, 50% 100%, 100% 0%);
+      clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
       width: 20px;
       height: 10px;
       background: inherit;

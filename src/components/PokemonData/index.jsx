@@ -1,28 +1,11 @@
 import * as S from "./styles"
 import PokemonType from "../PokemonType"
-import fullHeartSrc from "../../assets/icons/FilledHeart.svg"
-import hollowHeartSrc from "../../assets/icons/HollowHeart.svg"
 import BasicPokemonData from "../BasicPokemonData"
 import PokemonStat from "../PokemonStat"
-import FavoritesTooltip from "../FavoritesTooltip"
 import { useSelector } from "react-redux"
-import { useDispatch } from "react-redux"
-import { SET_NEW_FAVORITE, REMOVE_FAVORITE } from "../../store/slices/FavoritesSlice"
-import { useState } from "react"
+import PokemonMainInfo from "../PokemonMainInfo"
 
 
-function upperCaseFirstLetter(str){
-    return str.charAt(0).toUpperCase() + str.slice(1)
-}
-
-
-function formatId(id){
-    let str = id.toString()
-    while(str.length < 3){
-        str = "0" + str
-    }
-    return str
-}
 
 function findFirstEnglishBio(entries){
     return entries.find(e => {
@@ -33,29 +16,7 @@ function findFirstEnglishBio(entries){
 
 const PokemonData = ({ data, color }) => {
 
-
-    const dispatch = useDispatch()
-
-    const [favoritesTooltip, setFavoritesTooltip] = useState(false)
-
-    const { favorites } = useSelector(({ favorites }) => favorites)
     const { darkMode } = useSelector(({ theme }) => theme)
-
-    const isFavorite = () => {
-        return favorites.find(e => e[0] === data?.name)
-    }
-
-    const toggleFavorite = () => {
-        if(isFavorite()){
-            dispatch(REMOVE_FAVORITE(data.name))
-            return
-        } if(favorites.length >= 12){
-          setFavoritesTooltip(true)
-          setTimeout(() => setFavoritesTooltip(false), 4000)
-          return
-        }
-        dispatch(SET_NEW_FAVORITE([data.name, data.id]));
-    }
 
     const pokemonBio = data && data.bio ? findFirstEnglishBio(data?.bio?.flavor_text_entries) : ""
 
@@ -63,14 +24,7 @@ const PokemonData = ({ data, color }) => {
     return (
       <S.Container color={color} dark={darkMode}>
         <div className="main-info">
-          <button className="heart" onClick={toggleFavorite}>
-            <FavoritesTooltip activated={favoritesTooltip} />
-            <img src={isFavorite() ? fullHeartSrc : hollowHeartSrc} alt="" />
-          </button>
-          <h1 className="colorful pokemon-name">
-            {data ? upperCaseFirstLetter(data.name) : false}
-          </h1>
-          <h5 className="colorful pokemon-id">{`#${formatId(data?.id || "")}`}</h5>
+          <PokemonMainInfo data={data}/>
         </div>
         <div className="types">
           {data?.types.map(({ type }) => {

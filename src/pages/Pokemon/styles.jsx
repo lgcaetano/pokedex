@@ -6,6 +6,17 @@ const Pokemon = styled.div`
   width: 100%;
   padding-right: 30px;
   flex-grow: 1;
+  .buttons-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .main-info-container{
+    flex-grow: 1;
+    color: ${({ theme }) => theme.colors.greyscale.background};
+    display: none;
+  }
   .left-panel {
     position: relative;
     align-self: stretch;
@@ -39,9 +50,15 @@ const Pokemon = styled.div`
     min-height: 650px;
     height: max-content;
     background: ${({ theme, color }) => theme.colors.pokemonTypes[color]};
+    .go-back-container{
+      display: none;
+    }
+    .main-info-container{
+      display: initial;
+    }
     .buttons-container{
         align-self: flex-start;
-        margin-left: 30px;
+        padding: 0 30px;
     }
     .left-panel {
       width: 100%;
@@ -52,9 +69,9 @@ const Pokemon = styled.div`
         top: calc(30vh - 150px);
       }
       .pokeball{
-          width: 35%;
+          width: 208px;
           top: 0;
-          left: 50%;
+          left: 40%;
       }
     }
   }

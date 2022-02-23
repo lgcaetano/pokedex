@@ -19,14 +19,6 @@ const Container = styled.div`
     display: flex;
     align-items: center;
   }
-  .pokemon-name {
-    font-size: ${({ theme }) => theme.fontSizes.veryLarge};
-    margin: 0 20px;
-  }
-  .pokemon-id {
-    align-self: flex-end;
-    margin-bottom: 3px;
-  }
   .types {
     display: flex;
     gap: 10px;
@@ -48,9 +40,13 @@ const Container = styled.div`
     left: 0;
     top: 25vh;
     padding: 30px;
+    padding-top: 70px;
     margin: 0px 5px;
     .basic-data{
       gap: 10px;
+    }
+    .main-info{
+      display: none
     }
   }
 `;
