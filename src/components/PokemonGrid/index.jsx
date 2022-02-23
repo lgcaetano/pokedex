@@ -38,6 +38,8 @@ const PokemonGrid = (props) => {
 
     const limitRef = useRef(20)
 
+    const largestGridSizeRef = useRef(20)
+
     const observerRef = useRef()
 
     useEffect(() => limitRef.current = limit, [limit])
@@ -62,7 +64,9 @@ const PokemonGrid = (props) => {
 
         observerRef.current = addInfiniteScrollListener(loaderRef.current, () => {
           
-          const newLimit = limitRef.current + 20
+          const newLimit = Math.min(limitRef.current + 20, largestGridSizeRef.current + 20)
+
+          // console.log(newLimit)
 
           setLimit(newLimit)
 
@@ -75,28 +79,32 @@ const PokemonGrid = (props) => {
     }, [dispatch, pokemonList, props.static])
 
     const generateCards = () => {
+      
+      const cards = pokemonList
+        ?.filter(props.filterFunction)
+        .map((element) => {
+          return (
+            <PokemonCard
+              name={element.name}
+              url={element.url}
+              key={element.name}
+            />
+          );
+        })
+        .slice(0, limit);
 
-        const cards = pokemonList
-          ?.filter(props.filterFunction)
-          .map((element) => {
-            return (
-              <PokemonCard
-                name={element.name}
-                url={element.url}
-                key={element.name}
-              />
-            );
-          }).slice(0, limit);
+      largestGridSizeRef.current = Math.max(largestGridSizeRef.current, cards.length)
+      // console.log(largestGridSizeRef.current)
 
-          if(cards.length <= 0 && !isLoading){
-            if(!isListFull){
-              dispatch(GET_MORE_POKEMONS())
-            }
-            return <NoPokemonFound/>
-          }
+      if (cards.length <= 0 && !isLoading) {
+        if (!isListFull) {
+          dispatch(GET_MORE_POKEMONS());
+        }
+        return <NoPokemonFound />;
+      }
 
-        return cards
-    }
+      return cards;
+    };
 
 
     return (
