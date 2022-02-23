@@ -53,7 +53,9 @@ const theme = {
         large: "16px",
         mid: "12px",
         small: "10px",
+        verySmall: "7px",
         veryLarge: "22px",
+        noImageFoundWarning: "40px",
         noPokemonFoundWarning: "148px" 
     }
 }

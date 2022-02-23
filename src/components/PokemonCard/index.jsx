@@ -7,6 +7,7 @@ import { SET_POKEMON_DATA } from "../../store/slices/pokemonSlice"
 import { useDispatch } from "react-redux"
 import { FadeLoader } from "react-spinners"
 import { css } from "@emotion/react"
+import NoPokemonFound from "../NoPokemonImage"
 
 function upperCaseFirstLetter(str){
     return str.charAt(0).toUpperCase() + str.slice(1)
@@ -66,14 +67,17 @@ const PokemonCard = ({ name, url }) => {
       top: 25px;
     `;
 
+    const mainType = types[0] ?? ""
+
     return (
       <Link to={`/pokemon/${data?.id}`}>
-        <S.StyledPokemonCard type={types[0] ?? ""} dark={darkMode}>
+        <S.StyledPokemonCard type={mainType} dark={darkMode}>
           <div className="img-container">
             <div className="id-container">{`#${formatId(data?.id || "")}`}</div>
             {!imageLoaded && hasImage ? <FadeLoader color="green" css={loaderStyles}/> : ""}
+            {!hasImage ? <NoPokemonFound type={mainType}/> : ""}
             <img
-              style={{ display: imageLoaded || !hasImage ? "initial" : "none" }}
+              style={{ display: imageLoaded && hasImage ? "initial" : "none" }}
               src={imgSrc}
               alt={`${upperCaseFirstLetter(name)}`}
               onLoad={() => setImageLoaded(true)}

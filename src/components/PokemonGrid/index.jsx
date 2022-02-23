@@ -94,7 +94,6 @@ const PokemonGrid = (props) => {
         .slice(0, limit);
 
       largestGridSizeRef.current = Math.max(largestGridSizeRef.current, cards.length)
-      // console.log(largestGridSizeRef.current)
 
       if (cards.length <= 0 && !isLoading) {
         if (!isListFull) {
