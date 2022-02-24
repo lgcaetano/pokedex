@@ -35,6 +35,8 @@ const PokemonGrid = (props) => {
 
     const [limit, setLimit] = useState(20)
 
+    const [cards, setCards] = useState([])
+
     const limitRef = useRef(20)
 
     const largestGridSizeRef = useRef(20)
@@ -58,8 +60,6 @@ const PokemonGrid = (props) => {
           
           const newLimit = Math.min(limitRef.current + 20, largestGridSizeRef.current + 20)
 
-          // console.log(newLimit)
-
           setLimit(newLimit)
 
           if(newLimit < pokemonList.length)
@@ -70,7 +70,7 @@ const PokemonGrid = (props) => {
         })
     }, [dispatch, pokemonList, props.static])
 
-    const generateCards = () => {
+    useEffect(() => {
       
       const cards = pokemonList
         ?.filter(props.filterFunction)
@@ -91,16 +91,16 @@ const PokemonGrid = (props) => {
         if (!isListFull) {
           dispatch(GET_MORE_POKEMONS());
         }
-        return <NoPokemonFound />;
+         setCards([]);
       }
 
-      return cards;
-    };
+      setCards(cards);
+    }, [pokemonList, dispatch, isListFull, isLoading, limit, props.filterFunction])
 
 
     return (
       <S.styledGrid>
-        {generateCards()}
+        {cards.length > 0 ? cards : <NoPokemonFound/>}
         <div className="loader-container" ref={loaderRef}>
           {!props.static && isLoading && !isListFull ? <PokeballLoader /> : ""}
         </div>

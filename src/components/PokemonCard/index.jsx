@@ -37,9 +37,10 @@ const PokemonCard = ({ name, url }) => {
 
     useEffect(() => {
 
+      let isMounted = true
       
       if(data)
-      return
+        return
       
       if (storeData) {
         const pokeData = storeData
@@ -49,14 +50,19 @@ const PokemonCard = ({ name, url }) => {
       }
       
       const getData = async () => {
-        const { data: pokemonData } = await axios.get(url)
-        dispatch(SET_POKEMON_DATA(pokemonData))
-        setData(pokemonData)
-        setTypes(pokemonData.types.map((e) => e.type.name))
-        const pokemonImage = pokemonData.sprites.other.dream_world.front_default
-        setHasImage(pokemonImage != null)
-      }
+        const { data: pokemonData } = await axios.get(url);
+        dispatch(SET_POKEMON_DATA(pokemonData));
+        if (isMounted) {
+          setData(pokemonData);
+          setTypes(pokemonData.types.map((e) => e.type.name));
+          const pokemonImage =
+            pokemonData.sprites.other.dream_world.front_default;
+          setHasImage(pokemonImage != null);
+        }
+      };
       getData()
+
+      return () => { isMounted = false }
     }, [data, url, name, dispatch, storeData])
 
     const imgSrc = data?.sprites.other.dream_world.front_default 

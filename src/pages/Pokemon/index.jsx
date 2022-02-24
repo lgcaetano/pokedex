@@ -72,7 +72,7 @@ const Pokemon = () => {
   return (
     <Layout color={mainType} pokemonPage={true}>
       <S.Pokemon color={mainType}>
-        <div className="left-panel">
+        <S.StyledPanel>
           <div className="buttons-container">
             <div className="go-back-container">
               <GoBackButton />
@@ -83,7 +83,7 @@ const Pokemon = () => {
           </div>
           <img src={pokeballImg} alt="" className="pokeball" />
           <img src={pokemonImgSrc} alt="" className="pokemon-photo" />
-        </div>
+        </S.StyledPanel>
         <PokemonData data={data} color={mainType} />
       </S.Pokemon>
     </Layout>
