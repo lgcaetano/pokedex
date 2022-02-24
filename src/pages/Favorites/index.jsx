@@ -31,13 +31,13 @@ const Favorites = () => {
     return (
       <Layout>
         <S.FavoritesBar>
-          <GoBackButton></GoBackButton>
-          <FavoritesButton favoritesPage={true}></FavoritesButton>
+          <GoBackButton/>
+          <FavoritesButton favoritesPage={true}/>
         </S.FavoritesBar>
         <PokemonGrid
           filterFunction={(e) => favorites.find(favorite => favorite[0] === e.name)}
           static={true}
-        ></PokemonGrid>
+        />
       </Layout>
     );
 }

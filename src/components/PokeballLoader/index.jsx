@@ -10,7 +10,7 @@ const PokeballLoader = () => {
             <div className="top-half"/>
             <div className="middle">
                 <div className="ball">
-                    <div className="inside-ball"></div>
+                    <div className="inside-ball"/>
                 </div>
             </div>
             <div className="bottom-half"/>

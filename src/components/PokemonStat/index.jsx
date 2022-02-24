@@ -33,7 +33,7 @@ const PokemonStat = ({ statName, statValue, color }) => {
                 {formatStat(statValue)}
             </div>
             <div className="stat-fill">
-                <div className="stat-bar"></div>
+                <div className="stat-bar"/>
             </div>
         </S.Stat>
     )

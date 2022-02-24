@@ -10,8 +10,8 @@ const Home = () => {
 
     return (
         <Layout>
-            <SearchBar changeFilter={setFilter}></SearchBar>
-            <PokemonGrid filterFunction={e => e.name.includes(filter.toLowerCase())}></PokemonGrid>
+            <SearchBar changeFilter={setFilter}/>
+            <PokemonGrid filterFunction={e => e.name.includes(filter.toLowerCase())}/>
         </Layout>
     )
 }

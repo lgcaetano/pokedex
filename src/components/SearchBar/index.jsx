@@ -26,7 +26,7 @@ const SearchBar = ({ changeFilter }) => {
         >
           <img src={searchValue ? clearSearchSrc : searchIconSrc} alt="" />
         </button>
-        <FavoritesButton></FavoritesButton>
+        <FavoritesButton/>
       </S.Container>
     );
 }

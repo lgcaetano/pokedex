@@ -67,7 +67,6 @@ const PokemonCard = ({ name, url }) => {
 
     const imgSrc = data?.sprites.other.dream_world.front_default 
 
-
     const mainType = types[0] ?? ""
 
     return (
