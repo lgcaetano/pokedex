@@ -16,12 +16,28 @@ const StyledPokemonCard = styled.div`
   flex-direction: column;
   border-radius: 10.5px;
   overflow: hidden;
-  .img-container {
-    position: relative;
+  .name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+  }
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.midSmall}) {
+    width: 104px;
+    height: 112px;
+    font-size: ${({ theme }) => theme.fontSizes.mid};
+  }
+`;
+
+
+
+const PokemonImg = styled.div`
+  position: relative;
     transition: 300ms all;
     background: ${({ theme, dark }) =>
       dark
-        ? theme.colors.greyscale.darkGray
+        ? theme.colors.greyscale.pokemonCardGray
         : theme.colors.greyscale.background};
     width: 100%;
     height: 80%;
@@ -36,13 +52,8 @@ const StyledPokemonCard = styled.div`
       height: 80%;
       object-fit: cover;
     }
-  }
-  .name {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
-  }
+
+    
   .id-container {
     position: absolute;
     right: 5px;
@@ -50,12 +61,6 @@ const StyledPokemonCard = styled.div`
     color: ${getMainColor};
     font-size: ${({ theme }) => theme.fontSizes.mid};
   }
+`
 
-  @media (max-width: ${({ theme }) => theme.breakpoints.midSmall}) {
-    width: 104px;
-    height: 112px;
-    font-size: ${({ theme }) => theme.fontSizes.mid};
-  }
-`;
-
-export { StyledPokemonCard }
+export { StyledPokemonCard, PokemonImg }

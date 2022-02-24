@@ -72,7 +72,7 @@ const PokemonCard = ({ name, url }) => {
     return (
       <Link to={`/pokemon/${data?.id}`}>
         <S.StyledPokemonCard type={mainType} dark={darkMode}>
-          <div className="img-container">
+          <S.PokemonImg type={mainType} dark={darkMode}>
             <div className="id-container">{`#${formatId(data?.id || "")}`}</div>
             {!imageLoaded && hasImage ? <PokeballLoader/> : ""}
             {!hasImage ? <NoPokemonFound type={mainType}/> : ""}
@@ -83,7 +83,7 @@ const PokemonCard = ({ name, url }) => {
               onLoad={() => setImageLoaded(true)}
               onError={() => setImageLoaded(true)}
             />
-          </div>
+          </S.PokemonImg>
           <div className="name">{upperCaseFirstLetter(name)}</div>
         </S.StyledPokemonCard>
       </Link>
