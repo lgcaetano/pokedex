@@ -6,7 +6,11 @@ const getMainColor = ({ theme, type }) => theme.colors.pokemonTypes[type]
 const StyledPokemonCard = styled.div`
   height: 150px;
   width: 150px;
-  background-color: ${({ theme, type }) => theme.colors.pokemonTypes[type]};
+  background-color: ${({ theme, type, dark }) =>
+    theme.colors.pokemonTypes[type] ||
+    (dark
+      ? theme.colors.greyscale.pokemonCardGray
+      : theme.colors.greyscale.veryLightGray)};
   color: ${({ theme }) => theme.colors.greyscale.white};
   display: flex;
   flex-direction: column;
@@ -18,8 +22,7 @@ const StyledPokemonCard = styled.div`
     background: ${({ theme, dark }) =>
       dark
         ? theme.colors.greyscale.darkGray
-        : theme.colors.greyscale.background
-    };
+        : theme.colors.greyscale.background};
     width: 100%;
     height: 80%;
     border-radius: inherit;
@@ -48,10 +51,10 @@ const StyledPokemonCard = styled.div`
     font-size: ${({ theme }) => theme.fontSizes.mid};
   }
 
-  @media(max-width: ${({ theme }) => theme.breakpoints.midSmall}){
+  @media (max-width: ${({ theme }) => theme.breakpoints.midSmall}) {
     width: 104px;
     height: 112px;
-    font-size: ${({ theme }) => theme.fontSizes.mid};;
+    font-size: ${({ theme }) => theme.fontSizes.mid};
   }
 `;
 

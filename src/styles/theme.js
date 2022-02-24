@@ -23,12 +23,14 @@ const theme = {
         greyscale: {
             darkGray: "#212121",
             mediumGray: "#666666",
+            veryLightGray: "#F2F4F7",
             buttonGray: "#8D8B92",
             dataTitleGray: "#B2B2B2",
             noPokemonGray: "#BDBDBD",
             lightGray: "#E0E0E0",
             white: "#FFFFFF",
-            background: "#F7F7F7"
+            background: "#F7F7F7",
+            pokemonCardGray: "#2F2F2F"
         },
         ioasys: {
             secondary: "#EC0344"

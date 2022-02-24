@@ -90,4 +90,13 @@ const PokemonCard = ({ name, url }) => {
     );
 }
 
+const EmptyPokemonSlot = () => {
+  const { darkMode } = useSelector(({ theme }) => theme)
+  return (
+    <S.StyledPokemonCard dark={darkMode}/>
+  )
+}
+
 export default PokemonCard
+
+export { EmptyPokemonSlot }

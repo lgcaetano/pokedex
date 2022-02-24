@@ -36,7 +36,7 @@ const Favorites = () => {
         </S.FavoritesBar>
         <PokemonGrid
           filterFunction={(e) => favorites.find(favorite => favorite[0] === e.name)}
-          static={true}
+          favoritesPage={true}
         />
       </Layout>
     );

@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { GET_MORE_POKEMONS } from "../../store/slices/pokemonSlice"
 import NoPokemonFound from "../NoPokemonFound"
 import PokeballLoader from "../PokeballLoader"
+import { EmptyPokemonSlot } from "../PokemonCard"
 
 
 
@@ -23,6 +24,12 @@ function addInfiniteScrollListener(ref, callback) {
     observer.observe(ref)
 
     return observer
+}
+
+function fillWithEmptyCards(arr){
+  while (arr.length < 12){
+    arr.push(<EmptyPokemonSlot key={arr.length}/>)
+  }
 }
 
 const PokemonGrid = (props) => {
@@ -65,14 +72,14 @@ const PokemonGrid = (props) => {
           if(newLimit < pokemonList.length)
             return
 
-          if (!props.static) 
+          if (!props.favoritesPage) 
             dispatch(GET_MORE_POKEMONS())
         })
-    }, [dispatch, pokemonList, props.static])
+    }, [dispatch, pokemonList, props.favoritesPage])
 
     useEffect(() => {
       
-      const cards = pokemonList
+      const cardsComponents = pokemonList
         ?.filter(props.filterFunction)
         .map((element) => {
           return (
@@ -85,24 +92,27 @@ const PokemonGrid = (props) => {
         })
         .slice(0, limit);
 
-      largestGridSizeRef.current = Math.max(largestGridSizeRef.current, cards.length)
+      if(props.favoritesPage)
+        fillWithEmptyCards(cardsComponents)
 
-      if (cards.length <= 0 && !isLoading) {
+      largestGridSizeRef.current = Math.max(largestGridSizeRef.current, cardsComponents.length)
+
+      if (cardsComponents.length <= 0 && !isLoading) {
         if (!isListFull) {
           dispatch(GET_MORE_POKEMONS());
         }
          setCards([]);
       }
 
-      setCards(cards);
-    }, [pokemonList, dispatch, isListFull, isLoading, limit, props.filterFunction])
+      setCards(cardsComponents);
+    }, [pokemonList, dispatch, isListFull, isLoading, limit, props.filterFunction, props.favoritesPage])
 
 
     return (
       <S.styledGrid>
         {cards.length > 0 ? cards : <NoPokemonFound/>}
         <div className="loader-container" ref={loaderRef}>
-          {!props.static && isLoading && !isListFull ? <PokeballLoader /> : ""}
+          {!props.favoritesPage && isLoading && !isListFull ? <PokeballLoader /> : ""}
         </div>
       </S.styledGrid>
     );
