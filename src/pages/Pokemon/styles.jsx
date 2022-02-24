@@ -18,22 +18,6 @@ const Pokemon = styled.div`
     display: none;
   }
 
-  .pokeball {
-    width: 300px;
-    max-width: 100%;
-    position: absolute;
-    top: 70px;
-    left: -50px;
-  }
-  .pokemon-photo {
-    position: absolute;
-    width: 340px;
-    max-height: 340px;
-    max-width: 150%;
-    right: -100px;
-    top: 66px;
-    z-index: 10;
-  }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.pokemonPage}) {
     display: flex;
@@ -53,17 +37,7 @@ const Pokemon = styled.div`
       padding: 0 30px;
     }
 
-    .pokemon-photo {
-      width: 200px;
-      max-height: 200px;
-      left: calc(50% - 100px);
-      top: calc(30vh - 150px);
-    }
-    .pokeball {
-      width: 208px;
-      top: 0;
-      left: 40%;
-    }
+    
   }
 `;
 
@@ -75,9 +49,38 @@ const StyledPanel = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  
+  .pokeball {
+    width: 300px;
+    max-width: 100%;
+    position: absolute;
+    top: 70px;
+    left: -50px;
+  }
+  .pokemon-photo {
+    position: absolute;
+    width: 340px;
+    max-height: 340px;
+    max-width: 150%;
+    right: -100px;
+    top: 66px;
+    z-index: 10;
+  }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.pokemonPage}) {
     width: 100%;
+    .pokemon-photo {
+      width: 200px;
+      max-height: 200px;
+      left: calc(50% - 100px);
+      top: calc(30vh - 150px);
+    }
+    .pokeball {
+      width: 208px;
+      top: 0;
+      left: unset;
+      right: 10%;
+    }
   }
 `;
 

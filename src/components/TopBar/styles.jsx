@@ -51,7 +51,7 @@ const StyledTopBar = styled.nav`
     width: ${({ theme }) => theme.dimensions.smallGridWidth};
   }
   
-  @media (max-width: ${({ theme }) => theme.breakpoints.verySmall}) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.small}) {
     width: ${({ theme }) => theme.dimensions.verySmallGridWidth};
     .title{
       span{

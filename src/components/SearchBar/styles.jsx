@@ -56,7 +56,7 @@ const Container = styled.div`
   }
 
   
-  @media (max-width: ${({ theme }) => theme.breakpoints.verySmall}) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.small}) {
     width: ${({ theme }) => theme.dimensions.verySmallGridWidth};
   }
 `;

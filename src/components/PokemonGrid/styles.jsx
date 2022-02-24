@@ -26,7 +26,7 @@ const styledGrid = styled.div`
     width: ${({ theme }) => theme.dimensions.smallGridWidth};
     grid-template-columns: auto auto auto;
   }
-  @media (max-width: ${({ theme }) => theme.breakpoints.verySmall}) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.small}) {
     width: ${({ theme }) => theme.dimensions.verySmallGridWidth};
     grid-template-columns: auto auto;
   }

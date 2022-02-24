@@ -72,7 +72,7 @@ const Pokemon = () => {
   return (
     <Layout color={mainType} pokemonPage={true}>
       <S.Pokemon color={mainType}>
-        <S.StyledPanel>
+        <S.StyledPanel color={mainType}>
           <div className="buttons-container">
             <div className="go-back-container">
               <GoBackButton />
