@@ -1,70 +1,47 @@
-# Getting Started with Create React App
+# Ioasys Pokédex
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A front-end web application that simulates a Pokédex with the help of the [PokéAPI](https://pokeapi.co/). Built with React, Redux and Styled Components.
 
-## Available Scripts
+A build of this project is live and can be found [here](https://lgcaetanopokedex.netlify.app/).
 
-In the project directory, you can run:
+## Installation and Setup Instructions
 
-### `npm start`
+#### Example:  
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Clone down this repository. You will need `node` and either `npm` or `yarn` installed globally on your machine.  
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Installation:
 
-### `npm test`
+`npm install` or `yarn install`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+To Start Server:
 
-### `npm run build`
+`npm start` or `yarn start`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+To Visit App:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Access [localhost:3000](localhost:3000) on your web browser of preference.  
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Reflection:
 
-### `npm run eject`
+This project was built for [Ioasys Camp 2022](https://camp.ioasys.com.br/). Because of that, there were certain requirements to be fulfilled, such as: 
+ 
+- Following a predesigned layout for reference (almost everything about the layout of the application had already been designed)
+- A list with Pokémons
+- The ability to search for Pokémons by name
+- Providing extra information (such as stats, abilities, etc.) about a specific Pokémon when its card is clicked. (I implemented this feature by wrapping the cards in links that take the user to that Pokémon's own page which was generated dynamically through dynamic routes with the help of `react-router-dom`)
+- Dark mode/Light mode toggling
+- A list of the user's favorite Pokémons. The list should store a maximum of 12 Pokémons, and it should be stored in LocalStorage.
+- Using `styled-components`
+- Using endpoint `sprites/other/dream-world` to fetch the Pokémons' pictures. 
+- Implementing infinite scroll to load more Pokémons, taking advantage of the fact that the API is paginated.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Because of these requirements, there weren't many decisions to be made about the project, but there were some important ones, such as what state management tool to use and how to handle API requests. I chose to use `redux` for state management, because I had just started to learn it and this seemed the perfect opportunity to build a project using it. It should be noted that I used `@redux/toolkit` and `redux-saga`, and have only used Redux with these tools. I chose `axios` to handle my API requests because I had some experience with it and I think `axios` helps keep the code more organized by instantiating objects to represent the APIs you might access.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+One of the main challenges I ran into was Responsiveness. Because of the predetermined design, it was challenging to make the layout responsive as the mobile design of the website was quite different from the desktop design in many aspects. The most challenging part was making the Pokémons' details page responsive.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Also, because I'm not very used to Redux, I had some difficulty with it, especially when dealing with asynchronous data.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Overall, I was satisfied with this project, it was certainly challenging at times, but I think I learned a lot while making it, especially about Redux and Styled Components.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Although I think all the requirements have been met, I do intend on adding more features to the project, like a quiz.
