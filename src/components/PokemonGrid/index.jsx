@@ -14,7 +14,7 @@ function addInfiniteScrollListener(callback) {
     const { scrollTop, scrollHeight, clientHeight } =
       document.documentElement;
 
-    if (scrollTop + clientHeight >= scrollHeight) {
+    if (scrollTop + clientHeight >= scrollHeight - 20) {
       callback()
     }
   }
@@ -48,21 +48,21 @@ const PokemonGrid = ({ favoritesPage, filterFunction }) => {
 
 
     useEffect(() => {
-          addInfiniteScrollListener(() => {
 
-          const newLimit = limitRef.current + 20
+      let isMounted = true
 
-            console.log(newLimit)
+      addInfiniteScrollListener(() => {
+        const newLimit = limitRef.current + 20;
 
-          setLimit(newLimit)
+        if (isMounted) setLimit(newLimit);
 
-          if(newLimit <= pokemonList.length)
-            return
+        if (newLimit <= pokemonList.length) return;
 
-          if (!favoritesPage && !isListFull) 
-            dispatch(GET_MORE_POKEMONS())
-        })
-    }, [dispatch, pokemonList, favoritesPage, isListFull])
+        if (!favoritesPage && !isListFull) dispatch(GET_MORE_POKEMONS());
+      });
+
+      return () => { isMounted = false }
+    }, [dispatch, pokemonList, favoritesPage, isListFull]);
 
 
 
