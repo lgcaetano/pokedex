@@ -57,15 +57,21 @@ const PokemonCard = ({ name, url }) => {
         if (isMounted) {
           setData(pokemonData);
           setTypes(pokemonData.types.map((e) => e.type.name));
-          const pokemonImage =
-            pokemonData.sprites.other.dream_world.front_default;
-          setHasImage(pokemonImage != null);
         }
       };
       getData()
 
       return cleanup
     }, [data, url, name, dispatch, storeData])
+
+
+    useEffect(() => {
+      if(!data)
+        return
+      const pokemonImage =
+            data.sprites.other.dream_world.front_default;
+          setHasImage(pokemonImage != null);
+    }, [data])
 
     const imgSrc = data?.sprites.other.dream_world.front_default 
 
