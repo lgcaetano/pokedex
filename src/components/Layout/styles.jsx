@@ -4,8 +4,8 @@ const StyledLayout = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 100vh;
-  width: 100%;
+  min-height: 101vh;    // o propósito de colocar a altura do layout como no mínimo 101vh
+  width: 100%;          // é garantir que o infinite scroll possa ocorrer
   transition: 300ms all;
   border-top: 20px solid
     ${({ theme, curColor }) =>

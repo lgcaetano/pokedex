@@ -38,15 +38,17 @@ const PokemonCard = ({ name, url }) => {
     useEffect(() => {
 
       let isMounted = true
+
+      const cleanup = () => { isMounted = false }
       
       if(data)
-        return
+        return cleanup
       
       if (storeData) {
         const pokeData = storeData
         setData(pokeData)
         setTypes(pokeData.types.map((e) => e.type.name))
-        return
+        return cleanup
       }
       
       const getData = async () => {
@@ -62,7 +64,7 @@ const PokemonCard = ({ name, url }) => {
       };
       getData()
 
-      return () => { isMounted = false }
+      return cleanup
     }, [data, url, name, dispatch, storeData])
 
     const imgSrc = data?.sprites.other.dream_world.front_default 
@@ -70,12 +72,15 @@ const PokemonCard = ({ name, url }) => {
     const mainType = types[0] ?? ""
 
     return (
-      <Link to={`/pokemon/${data?.id}`}>
+      <Link
+        to={`/pokemon/${data?.id}`}
+        style={{ pointerEvents: `${data?.name ? "initial" : "none"}` }}
+      >
         <S.StyledPokemonCard type={mainType} dark={darkMode}>
           <S.PokemonImg type={mainType} dark={darkMode}>
             <div className="id-container">{`#${formatId(data?.id || "")}`}</div>
-            {!imageLoaded && hasImage ? <PokeballLoader/> : ""}
-            {!hasImage ? <NoPokemonFound type={mainType}/> : ""}
+            {!imageLoaded && hasImage ? <PokeballLoader /> : ""}
+            {!hasImage ? <NoPokemonFound type={mainType} /> : ""}
             <img
               style={{ display: imageLoaded && hasImage ? "initial" : "none" }}
               src={imgSrc}

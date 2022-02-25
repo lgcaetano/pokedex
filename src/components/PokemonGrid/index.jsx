@@ -9,21 +9,15 @@ import { EmptyPokemonSlot } from "../PokemonCard"
 
 
 
-const observerOptions ={
-	root: null,
-	rootMargin: '0px',
-	threshold: 0.5
-}
+function addInfiniteScrollListener(callback) {
+  window.onscroll = () => {
+    const { scrollTop, scrollHeight, clientHeight } =
+      document.documentElement;
 
-
-function addInfiniteScrollListener(ref, callback) {
-    const observer = new IntersectionObserver(entries => {
-        if(entries[0].isIntersecting)
-            callback()
-    }, observerOptions)
-    observer.observe(ref)
-
-    return observer
+    if (scrollTop + clientHeight >= scrollHeight) {
+      callback()
+    }
+  }
 }
 
 function fillWithEmptyCards(arr){
@@ -32,7 +26,7 @@ function fillWithEmptyCards(arr){
   }
 }
 
-const PokemonGrid = (props) => {
+const PokemonGrid = ({ favoritesPage, filterFunction }) => {
 
     const dispatch = useDispatch()
 
@@ -40,19 +34,13 @@ const PokemonGrid = (props) => {
 
     const isListFull = !nextPage
 
-    const [limit, setLimit] = useState(20)
+    const [limit, setLimit] = useState(50)
 
     const [cards, setCards] = useState([])
 
-    const limitRef = useRef(20)
-
-    const largestGridSizeRef = useRef(20)
-
-    const observerRef = useRef()
+    const limitRef = useRef(50)
 
     useEffect(() => limitRef.current = limit, [limit])
-
-    const loaderRef = useRef()
 
     useEffect(() => {
       dispatch(GET_MORE_POKEMONS())
@@ -60,59 +48,65 @@ const PokemonGrid = (props) => {
 
 
     useEffect(() => {
+          addInfiniteScrollListener(() => {
 
-        observerRef.current?.unobserve(loaderRef.current)
+          const newLimit = limitRef.current + 20
 
-        observerRef.current = addInfiniteScrollListener(loaderRef.current, () => {
-          
-          const newLimit = Math.min(limitRef.current + 20, largestGridSizeRef.current + 20)
+            console.log(newLimit)
 
           setLimit(newLimit)
 
-          if(newLimit < pokemonList.length)
+          if(newLimit <= pokemonList.length)
             return
 
-          if (!props.favoritesPage) 
+          if (!favoritesPage && !isListFull) 
             dispatch(GET_MORE_POKEMONS())
         })
-    }, [dispatch, pokemonList, props.favoritesPage])
+    }, [dispatch, pokemonList, favoritesPage, isListFull])
+
+
 
     useEffect(() => {
       
-      const cardsComponents = pokemonList
-        ?.filter(props.filterFunction)
-        .map((element) => {
-          return (
-            <PokemonCard
-              name={element.name}
-              url={element.url}
-              key={element.name}
-            />
-          );
-        })
-        .slice(0, limit);
+      let isMounted = true;
 
-      if(props.favoritesPage)
-        fillWithEmptyCards(cardsComponents)
+      if (isMounted) {
+        const cardsComponents = pokemonList
+          ?.filter(filterFunction)
+          .map((element) => {
+            return (
+              <PokemonCard
+                name={element.name}
+                url={element.url}
+                key={element.name}
+              />
+            );
+          })
+          .slice(0, limit);
 
-      largestGridSizeRef.current = Math.max(largestGridSizeRef.current, cardsComponents.length)
+        if (favoritesPage) 
+          fillWithEmptyCards(cardsComponents);
 
-      if (cardsComponents.length <= 0 && !isLoading) {
-        if (!isListFull) {
-          dispatch(GET_MORE_POKEMONS());
+        if (cardsComponents.length <= 0 && !isLoading) {
+          if (!isListFull) {
+            dispatch(GET_MORE_POKEMONS());
+          }
+          setCards([]);
         }
-         setCards([]);
-      }
 
-      setCards(cardsComponents);
-    }, [pokemonList, dispatch, isListFull, isLoading, limit, props.filterFunction, props.favoritesPage])
+        setCards(cardsComponents);
+      }
+      return () => {
+        isMounted = false;
+      };
+    }, [pokemonList, dispatch, isListFull, isLoading, limit, filterFunction, favoritesPage])
 
 
     return (
       <S.styledGrid>
-        {cards.length > 0 ? cards : <NoPokemonFound/>}
-        <div className="loader-container" ref={loaderRef}>
-          {!props.favoritesPage && isLoading && !isListFull ? <PokeballLoader /> : ""}
+        {(cards.length > 0) || isLoading ? cards : <NoPokemonFound/>}
+        <div className="loader-container">
+          {!favoritesPage && isLoading && !isListFull ? <PokeballLoader /> : ""}
         </div>
       </S.styledGrid>
     );
