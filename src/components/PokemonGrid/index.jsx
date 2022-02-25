@@ -10,13 +10,15 @@ import { EmptyPokemonSlot } from "../PokemonCard"
 
 
 function addInfiniteScrollListener(callback) {
-  window.onscroll = () => {
+  const scrollHandler = () => {
     const { scrollTop, scrollHeight, clientHeight } =
       document.documentElement;
 
-    if (scrollTop + clientHeight >= scrollHeight - 20) {
+    if (scrollTop + clientHeight >= scrollHeight - 100) {
       callback()
     }
+  window.onscroll = scrollHandler
+  window.ontouchmove = scrollHandler  
   }
 }
 
