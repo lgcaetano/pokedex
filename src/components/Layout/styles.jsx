@@ -18,6 +18,11 @@ const StyledLayout = styled.div`
       ? theme.colors.greyscale.darkGray 
       : theme.colors.greyscale.background};
 
+  color: ${({ dark, theme }) =>
+    dark 
+      ? theme.colors.greyscale.white 
+      : "black"};
+
   .container {
     flex-grow: 1;
     display: flex;

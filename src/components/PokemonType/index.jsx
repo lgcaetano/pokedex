@@ -1,9 +1,6 @@
 import * as S from "./styles"
+import { upperCaseFirstLetter } from "../../utils"
 
-
-function upperCaseFirstLetter(str){
-    return str.charAt(0).toUpperCase() + str.slice(1)
-}
 
 const PokemonType = ({ type }) => {
     return (

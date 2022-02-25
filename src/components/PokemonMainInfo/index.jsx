@@ -6,21 +6,7 @@ import { useState } from "react"
 import fullHeartSrc from "../../assets/icons/FilledHeart.svg"
 import hollowHeartSrc from "../../assets/icons/HollowHeart.svg"
 import FavoritesTooltip from "../FavoritesTooltip"
-
-
-function upperCaseFirstLetter(str){
-    return str.charAt(0).toUpperCase() + str.slice(1)
-}
-
-
-function formatId(id){
-    let str = id.toString()
-    while(str.length < 3){
-        str = "0" + str
-    }
-    return str
-}
-
+import { upperCaseFirstLetter, formatId } from "../../utils"
 
 const PokemonMainInfo = ({ data }) => {
 

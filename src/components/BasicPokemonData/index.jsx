@@ -2,19 +2,13 @@ import * as S from "./styles"
 import scaleSrc from "../../assets/icons/Scale.svg"
 import rulerSrc from "../../assets/icons/Ruler.svg"
 import { useSelector } from "react-redux"
+import { upperCaseFirstLetter } from "../../utils"
 
 
 const icons = {
     "weight": <img src={scaleSrc} alt="" />,
     "height": <img src={rulerSrc} alt="" />,
     "abilities": ""
-}
-
-
-function upperCaseFirstLetter(str){
-    if(!str)
-      return
-    return str.charAt(0).toUpperCase() + str.slice(1)
 }
 
 
