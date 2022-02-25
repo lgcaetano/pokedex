@@ -11,15 +11,14 @@ import { EmptyPokemonSlot } from "../PokemonCard"
 
 function addInfiniteScrollListener(callback) {
   const scrollHandler = () => {
-    const { scrollTop, scrollHeight, clientHeight } =
-      document.documentElement;
+    const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
 
     if (scrollTop + clientHeight >= scrollHeight - 100) {
-      callback()
+      callback();
     }
-  window.onscroll = scrollHandler
-  window.ontouchmove = scrollHandler  
-  }
+  };
+  window.onscroll = scrollHandler;
+  window.ontouchmove = scrollHandler;
 }
 
 function fillWithEmptyCards(arr){
