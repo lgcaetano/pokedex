@@ -16,7 +16,6 @@ const pokemonSlice = createSlice({
             return {...state, isLoading: true}
         },
         STOP_LOADING: (state) => {
-            console.log("STOP")
             return {...state, isLoading: false}
         },
         FETCH_MORE_POKEMONS_SUCCESS: (state, { payload }) => {

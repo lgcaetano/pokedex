@@ -24,7 +24,6 @@ const Favorites = () => {
           return
 
         if(!pokemonList.find(pokemon => pokemon.name === e[0])){
-          console.log(e[0])
           lackingPokemonData = true
         }
       })
