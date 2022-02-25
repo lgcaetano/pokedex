@@ -44,7 +44,7 @@ const Pokemon = styled.div`
 const StyledPanel = styled.div`
   position: relative;
   align-self: stretch;
-  width: 400px;
+  width: 350px;
   background: ${({ theme, color }) => theme.colors.pokemonTypes[color]};
   display: flex;
   flex-direction: column;

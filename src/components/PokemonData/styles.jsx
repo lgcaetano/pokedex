@@ -7,6 +7,8 @@ const Container = styled.div`
   margin-left: 150px;
   border-radius: 15px;
   padding-bottom: 50px;
+  max-width: 500px;
+
   background: ${({ theme, dark }) =>
       dark ? theme.colors.greyscale.darkGray : theme.colors.greyscale.background};
   .heart{
@@ -35,6 +37,7 @@ const Container = styled.div`
   @media (max-width: ${({ theme }) => theme.breakpoints.pokemonPage}) {
     gap: 15px;
     max-height: 70vh;
+    max-width: 100vw;
     font-size: ${({ theme }) => theme.fontSizes.mid};
     position: relative;
     left: 0;
