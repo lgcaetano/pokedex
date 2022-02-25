@@ -95,6 +95,7 @@ const PokemonGrid = ({ favoritesPage, filterFunction }) => {
         }
 
         setCards(cardsComponents);
+        console.log(isLoading)
       }
       return () => {
         isMounted = false;

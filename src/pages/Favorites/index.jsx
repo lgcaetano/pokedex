@@ -6,7 +6,7 @@ import { useSelector } from "react-redux"
 import GoBackButton from "../../components/GoBackButton"
 import { useEffect } from "react"
 import { useDispatch } from "react-redux"
-import { FETCH_MORE_POKEMONS_SUCCESS } from "../../store/slices/pokemonSlice"
+import { GET_MORE_POKEMONS } from "../../store/slices/pokemonSlice"
 
 const Favorites = () => {
 
@@ -16,16 +16,22 @@ const Favorites = () => {
     const { pokemonList } = useSelector(({ pokemons }) => pokemons)
 
     useEffect(() => {
+      let lackingPokemonData = false
       favorites.forEach(e => {
+
 
         if(e[1] <= 50)
           return
 
         if(!pokemonList.find(pokemon => pokemon.name === e[0])){
-          const pokemonData = [{name: e[0], url: `https://pokeapi.co/api/v2/pokemon/${e[1]}`}]
-          dispatch(FETCH_MORE_POKEMONS_SUCCESS({ data: { results : pokemonData } }))
+          console.log(e[0])
+          lackingPokemonData = true
         }
       })
+
+      if(lackingPokemonData){
+        dispatch(GET_MORE_POKEMONS())
+      }
     }, [favorites, dispatch, pokemonList])
 
     return (
