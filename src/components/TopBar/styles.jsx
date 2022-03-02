@@ -7,6 +7,17 @@ const StyledTopBar = styled.nav`
   padding: 50px 0;
   height: max-content;
   color: ${({ theme }) => theme.colors.ioasys.secondary};
+  .fa-solid, .fa-solid::before{
+    font-family: "FontAwesome";
+    font-style: normal;
+    font-size: 25px;
+  }
+  .quiz-link{
+    display: ${({ quiz }) => quiz ? "none" : "flex"};
+    align-items: center;
+    gap: 10px;
+    
+  }
   .title {
     height: 28px;
     display: flex;
@@ -49,15 +60,19 @@ const StyledTopBar = styled.nav`
   @media (max-width: ${({ theme }) => theme.breakpoints.pokemonPage}) {
     display: ${({ pokemon }) => pokemon ? "none" : "flex"};
     width: ${({ theme }) => theme.dimensions.smallGridWidth};
-  }
-  
-  @media (max-width: ${({ theme }) => theme.breakpoints.small}) {
-    width: ${({ theme }) => theme.dimensions.verySmallGridWidth};
     .title{
       span{
         display: none;
       }
     }
+    .link-text{
+      display: none;
+    }
+  }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.small}) {
+    width: ${({ theme }) => theme.dimensions.verySmallGridWidth};
+    
   }
 `;
 

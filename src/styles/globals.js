@@ -11,6 +11,8 @@ export default createGlobalStyle`
         text-decoration: none;
     }
 
+    
+
     button{
         border: none;
         cursor: pointer;

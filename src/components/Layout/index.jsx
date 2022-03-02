@@ -10,7 +10,7 @@ const Layout = (props) => {
     return (
       <S.StyledLayout dark={darkMode} curColor={props.color}>
         <div className="container">
-          <TopBar pokemonPage={props.pokemonPage}/>
+          <TopBar pokemonPage={props.pokemonPage} quizPage={props.quizPage}/>
           <div className="content">{props.children}</div>
         </div>
       </S.StyledLayout>

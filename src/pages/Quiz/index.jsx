@@ -79,7 +79,7 @@ const Quiz = () => {
       setAllAnswers(shuffledArr(answersArr));
       setCorrectAnswer(answerPokemon);
       setUserAnswer(null);
-      
+
       setTimeout(() => {
         setImg(answerData.sprites.other.dream_world.front_default);
       }, 500); // atrasando a mudança de imagens porque o usuário podia ver qual o próximo pokemon
@@ -130,7 +130,7 @@ const Quiz = () => {
   };
 
   return (
-    <Layout>
+    <Layout quizPage={true}>
       <S.Quiz answered={!!userAnswer}>
         <div className="image-container">
           <div className="score">Score: {score}</div>

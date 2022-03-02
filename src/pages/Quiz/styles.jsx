@@ -4,8 +4,10 @@ import styled from "styled-components";
 
 const Quiz = styled.div`
     transition: 500ms all;
-    height: 450px;
+    height: auto;
     width: 600px;
+    
+  width: ${({ theme }) => theme.dimensions.gridWidth};
     border: 1px solid ${({ theme }) => theme.colors.ioasys.secondary};
     margin-bottom: 30px;
     border-radius: 30px;
@@ -54,6 +56,31 @@ const Quiz = styled.div`
 
         }
     }
+    @media(max-width: ${({ theme }) => theme.breakpoints.mid}){
+    width: ${({ theme }) => theme.dimensions.midGridWidth};
+  }
+
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.midSmall}) {
+    width: ${({ theme }) => theme.dimensions.midSmallGridWidth};
+  }
+
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.pokemonPage}) {
+    width: ${({ theme }) => theme.dimensions.smallGridWidth};
+    flex-direction: column;
+    height: auto;
+    .image-container{
+        width: 100%;
+    }
+    .buttons-container{
+        width: 100%;
+    }
+  }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.small}) {
+    width: ${({ theme }) => theme.dimensions.verySmallGridWidth};
+  }
 `
 
 
